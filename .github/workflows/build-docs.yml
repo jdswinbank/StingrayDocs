@@ -39,6 +39,7 @@ jobs:
           pip install nbsphinx
           pip install sphinx_rtd_theme
           pip install pandoc
+          pip install ipython
         working-directory: stingray
       - name: Build documentation
         run: make html
