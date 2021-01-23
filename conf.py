@@ -86,7 +86,8 @@ exclude_patterns = ['stingray/astropy_helpers', '_build', 'Thumbs.db',
                     "**/README.rst", "**/_templates",
                     "**/CREDITS.rst", '**/validation/*.ipynb',
                     '**/docs/index.rst', '**/docs/simulator.rst',
-                    'ci-helpers', '**/LICENSE.rst', 'stingray']
+                    'ci-helpers', '**/LICENSE.rst',
+                    'stingray/docs/basics.rst']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
