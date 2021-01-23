@@ -1,0 +1,572 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Stingray: Next-Generation Spectral Timing Software &mdash; Stingray dev documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Downloading and Installing Stingray" href="stingray/docs/install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> Stingray
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="stingray/docs/install.html">Downloading and Installing Stingray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core Stingray Functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modeling.html">The Stingray Modelling Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulator.html">The Simulator Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pulsar.html">Analysing Pulsar Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stingray/docs/api.html">Stingray API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Stingray</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Stingray: Next-Generation Spectral Timing Software</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="stingray-next-generation-spectral-timing-software">
+<h1>Stingray: Next-Generation Spectral Timing Software<a class="headerlink" href="#stingray-next-generation-spectral-timing-software" title="Permalink to this headline">¶</a></h1>
+<p>Stingray is a new community-developed spectral-timing software package in Python for astrophysical data.</p>
+<a class="reference internal image-reference" href="_images/stingray_logo.png"><img alt="Stingray logo, outline of a stingray on top of a graph of the power spectrum of an X-ray binary" class="align-center" src="_images/stingray_logo.png" style="width: 280.0px; height: 279.2px;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Performance improvements.
+Version 0.2 will introduce a few performance improvements when
+<code class="docutils literal notranslate"><span class="pre">Lightcurve</span></code> objects are created. Once the user defines either
+the counts per bin or the count rates, the other quantity will
+be evaluated _lazily_, the first time it is requested. Also, we
+introduce a new <code class="docutils literal notranslate"><span class="pre">low_memory</span></code> option in <code class="docutils literal notranslate"><span class="pre">Lightcurve</span></code>: if
+selected, and users define e.g. <code class="docutils literal notranslate"><span class="pre">counts</span></code>, <code class="docutils literal notranslate"><span class="pre">countrate</span></code> will
+be calculated _every_time it is requested, and will not be
+stored in order to free up RAM.</p>
+</div>
+<div class="section" id="the-vision">
+<h2>The Vision<a class="headerlink" href="#the-vision" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of official software packages for X-ray spectral fitting (XSPEC, ISIS,
+Sherpa, …). Such a widely used and standard software package does not exist for X-ray timing,
+so for now it remains mostly done with custom, proprietary software. During the 2016 workshop
+<a class="reference external" href="http://www.lorentzcenter.nl/lc/web/2016/720/info.php3?wsid=720&amp;venue=Oort/">The X-ray Spectral-Timing Revolution</a>,
+a group of X-ray astronomers and developers decided to agree on a common platform to develop a
+new software package. This software package will merge existing efforts for a timing package in
+Python and provide the basis for developing spectral-timing analysis tools, and be structured with
+the best guidelines for modern open-source programming, following <a class="reference external" href="http://www.astropy.org">the example of Astropy</a>.
+This software will have an easily accessible scripting interface (possibly a GUI) and a public API for
+power users. The ultimate goal is to provide the community with a package that eases the learning curve
+for advanced spectral-timing techniques, with a correct statistical framework.</p>
+</div>
+<div class="section" id="overview-of-currently-implemented-methods">
+<h2>Overview of Currently Implemented Methods<a class="headerlink" href="#overview-of-currently-implemented-methods" title="Permalink to this headline">¶</a></h2>
+<p>Currently implemented functionality in this library comprises:</p>
+<ul class="simple">
+<li><p>loading event lists from fits files of a few missions (RXTE/PCA, NuSTAR/FPM, XMM-Newton/EPIC)</p></li>
+<li><p>constructing light curves from event data, various operations on light curves (e.g. add, subtract, join, truncate)</p></li>
+<li><p>Good Time Interval operations</p></li>
+<li><p>power spectra in Leahy, rms normalization, absolute rms and no normalization</p></li>
+<li><p>averaged power spectra</p></li>
+<li><p>dynamical power spectra</p></li>
+<li><p>maximum likelihood fitting of periodograms/parametric models</p></li>
+<li><p>(averaged) cross spectra</p></li>
+<li><p>coherence, time lags</p></li>
+<li><p>cross correlation functions</p></li>
+<li><p>r.m.s. spectra and lags (time vs energy, time vs frequency); UNDER DEVELOPMENT</p></li>
+<li><p>covariance spectra; UNDER DEVELOPMENT</p></li>
+<li><p>bispectra; UNDER DEVELOPMENT</p></li>
+<li><p>(Bayesian) quasi-periodic oscillation searches</p></li>
+<li><p>simulating a light curve with a given power spectrum</p></li>
+<li><p>simulating a light curve from another light curve and a 1-d (time) or 2-d (time-energy) impulse response</p></li>
+<li><p>simulating an event list from a given light curve _and_ with a given energy spectrum</p></li>
+<li><p>pulsar searches with Epoch Folding, <span class="math notranslate nohighlight">\(Z^2_n\)</span> test</p></li>
+</ul>
+<div class="section" id="future-additions">
+<h3>Future Additions<a class="headerlink" href="#future-additions" title="Permalink to this headline">¶</a></h3>
+<p>We welcome feature requests! If you need a particular tool that’s currently not implemented or
+have a new method you think might be usefully implemented in Stingray, please <a class="reference internal" href="#getinvolved"><span class="std std-ref">get in touch</span></a>!</p>
+<p>Other future additions we are currently implementing are:</p>
+<ul class="simple">
+<li><p>bicoherence</p></li>
+<li><p>phase-resolved spectroscopy of quasi-periodic oscillations</p></li>
+<li><p>Fourier-frequency-resolved spectroscopy</p></li>
+<li><p>power colours</p></li>
+<li><p>full HEASARC-compatible mission support</p></li>
+<li><p>pulsar searches with $H$-test</p></li>
+<li><p>binary pulsar searches</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="this-documentation-and-additional-resources">
+<h2>This Documentation and Additional Resources<a class="headerlink" href="#this-documentation-and-additional-resources" title="Permalink to this headline">¶</a></h2>
+<p>These pages lay out the documentation for the <a class="reference external" href="https://github.com/StingraySoftware/stingray">Stingray source library</a>.</p>
+<p>Aside from the <a class="reference internal" href="stingray/docs/api.html#api"><span class="std std-ref">Stingray API</span></a> reference, there are a number of tutorial-style documents covering the core
+library as well as a number of sub-modules. These tutorials are built from executable Jupuyter notebooks available
+for cloning in a separate <a class="reference external" href="https://github.com/StingraySoftware/notebooks">notebooks repository</a>.</p>
+<p>Further spectral-timing functionality, in particularly command line scripts based on the API defined
+within Stingray, is available in the package <a class="reference external" href="https://github.com/StingraySoftware/HENDRICS">HENDRICS</a>.
+A Graphical User Interface is under development as part of the
+project <a class="reference external" href="https://github.com/StingraySoftware/dave">DAVE</a>.</p>
+</div>
+<div class="section" id="citing-stingray">
+<h2>Citing Stingray<a class="headerlink" href="#citing-stingray" title="Permalink to this headline">¶</a></h2>
+<p>If you use Stingray in your data analysis, <strong>please cite us</strong>! Citations are still the main currency
+of the academic world, and pointing to citations is <em>the</em> best way to help us ensure that Stingray
+continues to be supported and we can continue working on it!</p>
+<p>Stingray now has an official citation! When using Stingray, pleace cite the
+<a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2019ApJ...881...39H/abstract">ApJ paper</a>. Here’s the bibtex entry
+for your convenience:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@ARTICLE</span><span class="p">{</span><span class="mi">2019</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">881.</span><span class="o">..</span><span class="mi">39</span><span class="n">H</span><span class="p">,</span>
+       <span class="n">author</span> <span class="o">=</span> <span class="p">{{</span><span class="n">Huppenkothen</span><span class="p">},</span> <span class="n">Daniela</span> <span class="ow">and</span> <span class="p">{</span><span class="n">Bachetti</span><span class="p">},</span> <span class="n">Matteo</span> <span class="ow">and</span>
+         <span class="p">{</span><span class="n">Stevens</span><span class="p">},</span> <span class="n">Abigail</span> <span class="n">L</span><span class="o">.</span> <span class="ow">and</span> <span class="p">{</span><span class="n">Migliari</span><span class="p">},</span> <span class="n">Simone</span> <span class="ow">and</span> <span class="p">{</span><span class="n">Balm</span><span class="p">},</span> <span class="n">Paul</span> <span class="ow">and</span>
+         <span class="p">{</span><span class="n">Hammad</span><span class="p">},</span> <span class="n">Omar</span> <span class="ow">and</span> <span class="p">{</span><span class="n">Khan</span><span class="p">},</span> <span class="n">Usman</span> <span class="n">Mahmood</span> <span class="ow">and</span> <span class="p">{</span><span class="n">Mishra</span><span class="p">},</span> <span class="n">Himanshu</span> <span class="ow">and</span>
+         <span class="p">{</span><span class="n">Rashid</span><span class="p">},</span> <span class="n">Haroon</span> <span class="ow">and</span> <span class="p">{</span><span class="n">Sharma</span><span class="p">},</span> <span class="n">Swapnil</span> <span class="ow">and</span> <span class="p">{</span><span class="n">Martinez</span> <span class="n">Ribeiro</span><span class="p">},</span> <span class="n">Evandro</span> <span class="ow">and</span>
+         <span class="p">{</span><span class="n">Valles</span> <span class="n">Blanco</span><span class="p">},</span> <span class="n">Ricardo</span><span class="p">},</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;{Stingray: A Modern Python Library for Spectral Timing}&quot;</span><span class="p">,</span>
+      <span class="n">journal</span> <span class="o">=</span> <span class="p">{</span>\<span class="n">apj</span><span class="p">},</span>
+     <span class="n">keywords</span> <span class="o">=</span> <span class="p">{</span><span class="n">methods</span><span class="p">:</span> <span class="n">data</span> <span class="n">analysis</span><span class="p">,</span> <span class="n">methods</span><span class="p">:</span> <span class="n">statistical</span><span class="p">,</span> <span class="n">X</span><span class="o">-</span><span class="n">rays</span><span class="p">:</span> <span class="n">binaries</span><span class="p">,</span> <span class="n">X</span><span class="o">-</span><span class="n">rays</span><span class="p">:</span> <span class="n">general</span><span class="p">,</span> <span class="n">Astrophysics</span> <span class="o">-</span> <span class="n">Instrumentation</span> <span class="ow">and</span> <span class="n">Methods</span> <span class="k">for</span> <span class="n">Astrophysics</span><span class="p">,</span> <span class="n">Astrophysics</span> <span class="o">-</span> <span class="n">High</span> <span class="n">Energy</span> <span class="n">Astrophysical</span> <span class="n">Phenomena</span><span class="p">},</span>
+         <span class="n">year</span> <span class="o">=</span> <span class="mi">2019</span><span class="p">,</span>
+        <span class="n">month</span> <span class="o">=</span> <span class="n">aug</span><span class="p">,</span>
+       <span class="n">volume</span> <span class="o">=</span> <span class="p">{</span><span class="mi">881</span><span class="p">},</span>
+       <span class="n">number</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">},</span>
+          <span class="n">eid</span> <span class="o">=</span> <span class="p">{</span><span class="mi">39</span><span class="p">},</span>
+        <span class="n">pages</span> <span class="o">=</span> <span class="p">{</span><span class="mi">39</span><span class="p">},</span>
+          <span class="n">doi</span> <span class="o">=</span> <span class="p">{</span><span class="mf">10.3847</span><span class="o">/</span><span class="mi">1538</span><span class="o">-</span><span class="mi">4357</span><span class="o">/</span><span class="n">ab258d</span><span class="p">},</span>
+<span class="n">archivePrefix</span> <span class="o">=</span> <span class="p">{</span><span class="n">arXiv</span><span class="p">},</span>
+       <span class="n">eprint</span> <span class="o">=</span> <span class="p">{</span><span class="mf">1901.07681</span><span class="p">},</span>
+ <span class="n">primaryClass</span> <span class="o">=</span> <span class="p">{</span><span class="n">astro</span><span class="o">-</span><span class="n">ph</span><span class="o">.</span><span class="n">IM</span><span class="p">},</span>
+       <span class="n">adsurl</span> <span class="o">=</span> <span class="p">{</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ui</span><span class="o">.</span><span class="n">adsabs</span><span class="o">.</span><span class="n">harvard</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="nb">abs</span><span class="o">/</span><span class="mi">2019</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">881.</span><span class="o">..</span><span class="mi">39</span><span class="n">H</span><span class="p">},</span>
+      <span class="n">adsnote</span> <span class="o">=</span> <span class="p">{</span><span class="n">Provided</span> <span class="n">by</span> <span class="n">the</span> <span class="n">SAO</span><span class="o">/</span><span class="n">NASA</span> <span class="n">Astrophysics</span> <span class="n">Data</span> <span class="n">System</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reporting-bugs-and-issues-getting-help-providing-feedback">
+<span id="getinvolved"></span><h2>Reporting Bugs and Issues, Getting Help, Providing Feedback<a class="headerlink" href="#reporting-bugs-and-issues-getting-help-providing-feedback" title="Permalink to this headline">¶</a></h2>
+<p>We would love to hear from you! We are writing Stingray to be useful to you, so if you
+encounter problems, have questions, would like to request features or just want to chat
+with us, please don’t hesitate to get in touch!</p>
+<p>The best and easiest way to get in touch with us regarding bugs and issues is the GitHub
+<a class="reference external" href="https://github.com/StingraySoftware/stingray/issues">Issues page</a>. If you’re not sure
+whether what you’ve encountered is a bug, if you have any questions or need advice getting
+some of the code to run, or would like to request a feature or suggest additions/changes,
+you can also contact us via the Slack group or our mailing list.</p>
+<p>Please use <a class="reference external" href="https://stingray-slack.herokuapp.com">this link</a> to join Slack or send
+<a class="reference external" href="https://github.com/orgs/StingraySoftware/people">one of us</a> an email to join the mailing list.</p>
+</div>
+<div class="section" id="how-to-get-involved">
+<h2>How to get involved<a class="headerlink" href="#how-to-get-involved" title="Permalink to this headline">¶</a></h2>
+<p>We encourage you to get involved with Stingray in any way you can! First, read through
+the <a class="reference external" href="https://github.com/StingraySoftware/stingray/blob/master/README.rst">README</a>. Then, fork
+the <a class="reference external" href="https://github.com/StingraySoftware/stingray">stingray</a> and
+<a class="reference external" href="https://github.com/StingraySoftware/notebooks">notebooks</a> repositories (if you need a primer on
+GitHub and git version control, <a class="reference external" href="https://www.webpagefx.com/blog/web-design/git-tutorials-beginners/">look here</a>)
+and work your way through the Jupyter notebook tutorials for the main modules. Once you’ve
+familiarized yourself with the basics of Stingray, go to the
+<a class="reference external" href="https://github.com/StingraySoftware/stingray">Stingray issues page</a> and try to tackle one! Other ways to
+get involved are outlined on the <a class="reference external" href="http://timelabtechnologies.com/ideas.html">project ideas</a> page,
+along with some astrophysical background/motivation. Finally, you can
+read <a class="reference external" href="https://speakerdeck.com/abigailstev/stingray-pyastro16">these slides</a> from an early talk on
+Stingray at the Python in Astronomy 2016 conference.</p>
+<p>For organizing and coordinating the software development, we have a Slack group and a mailing
+list – please use <a class="reference external" href="https://stingray-slack.herokuapp.com">this link</a> for Slack or send
+<a class="reference external" href="https://github.com/orgs/StingraySoftware/people">one of us</a> an email to join.</p>
+</div>
+<div class="section" id="previous-projects-being-merged-in-stingray">
+<h2>Previous projects being merged in Stingray<a class="headerlink" href="#previous-projects-being-merged-in-stingray" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Daniela Huppenkothen’s original Stingray</p></li>
+<li><p>Matteo Bachetti’s <a class="reference external" href="https://github.com/matteobachetti/MaLTPyNT">MaLTPyNT</a></p></li>
+<li><p>Abigail Stevens’ RXTE power spectra code and phase-resolved spectroscopy code</p></li>
+<li><p>Simone Migliari’s and Paul Balm’s X-ray data exploration GUI commissioned by ESA</p></li>
+</ul>
+</div>
+<div class="section" id="acknowledgments">
+<h2>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h2>
+<p>Thank you to JetBrains for the free use of <a class="reference external" href="https://www.jetbrains.com/pycharm/">PyCharm</a>.</p>
+<p>Stingray is participating in the <a class="reference external" href="https://summerofcode.withgoogle.com">Google Summer of Code</a> in
+2018 under <a class="reference external" href="http://openastronomy.org">Open Astronomy</a> and has previously participated in  2017 under
+the <a class="reference external" href="https://www.python.org/psf/">Python Software Foundation</a>, and in 2016 under
+<a class="reference external" href="http://timelabtechnologies.com">Timelab</a>.</p>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="stingray/docs/install.html">Downloading and Installing Stingray</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/install.html#installing-via-conda">Installing via <code class="docutils literal notranslate"><span class="pre">conda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/install.html#installing-via-pip">Installing via <code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/install.html#installing-from-source-bleeding-edge-version">Installing from source (bleeding edge version)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/install.html#installing-development-environment-for-new-contributors">Installing development environment (for new contributors)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/install.html#test-suite">Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/install.html#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core Stingray Functionality</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core.html#working-with-event-data">Working with Event Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/EventList/EventList%20Tutorial.html">Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/EventList/EventList%20Tutorial.html#Setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#working-with-lightcurves">Working with Lightcurves</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Lightcurve/Lightcurve%20tutorial.html">Creating a light curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Lightcurve/Lightcurve%20tutorial.html#Properties">Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Lightcurve/Lightcurve%20tutorial.html#Operations">Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Lightcurve/Lightcurve%20tutorial.html#Methods">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Lightcurve/Lightcurve%20tutorial.html#Sample-Data">Sample Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Lightcurve/Analyze%20light%20curves%20chunk%20by%20chunk%20-%20an%20example.html">R.m.s. - intensity diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#fourier-analysis">Fourier Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#powerspectra">Powerspectra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#dynamical-power-spectra">Dynamical Power Spectra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#cross-spectra">Cross Spectra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#cross-and-autocorrelations">Cross- and Autocorrelations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#bispectra">Bispectra</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modeling.html">The Stingray Modelling Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Modeling/ModelingExamples.html">The Stingray Modeling API Explained</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Modeling/ModelingExamples.html#Some-background">Some background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Modeling/ModelingExamples.html#Likelihoods-and-Posteriors">Likelihoods and Posteriors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Modeling/ModelingExamples.html#Maximum-Likelihood-Fitting">Maximum Likelihood Fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Modeling/ModelingExamples.html#Bayesian-Parameter-Estimation">Bayesian Parameter Estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Modeling/ModelingExamples.html#Calibrating-Likelihood-Ratio-Tests">Calibrating Likelihood Ratio Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Modeling/ModelingExamples.html#Bayesian-ish-QPO-Searches">Bayesian-ish QPO Searches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Modeling/ModelingExamples.html#Convenience-Functions">Convenience Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="simulator.html">The Simulator Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="simulator.html#important-concepts">Important Concepts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Concepts/Simulator.html">Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Concepts/Simulator.html#Lag-frequency-Spectrum">Lag-frequency Spectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Concepts/Simulator.html#Energy-Dependence">Energy Dependence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Concepts/Inverse%20Transform%20Sampling.html">Inverse Transform Sampling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Concepts/PowerLaw%20Spectrum.html">Simulating Light Curves from Power Law Power Spectra</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simulator.html#the-simulator-object">The Simulator Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Simulator%20Tutorial.html">Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Simulator%20Tutorial.html#Setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Simulator%20Tutorial.html#(i)-Using-power-law-spectrum">(i) Using power-law spectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Simulator%20Tutorial.html#(ii)-Using-user-defined-model">(ii) Using user-defined model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Simulator%20Tutorial.html#(iii)-Using-pre-defined-models">(iii) Using pre-defined models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Simulator%20Tutorial.html#(iv)-Using-impulse-response">(iv) Using impulse response</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simulator.html#available-spectral-models">Available Spectral Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Spectral%20Models.html">Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Spectral%20Models.html#Setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simulator.html#an-example-lag-analysis">An Example Lag Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Lag%20Analysis.html">Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Lag%20Analysis.html#Setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Simulator/Lag%20Analysis.html#Initializing">Initializing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simulator.html#transfer-functions">Transfer Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Transfer%20Functions/Data%20Preparation.html">Setting Up Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Transfer%20Functions/TransferFunction%20Tutorial.html">Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Transfer%20Functions/TransferFunction%20Tutorial.html#Setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simulator.html#window-functions">Window Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Window%20Functions/window_functions.html">Window functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Window%20Functions/window_functions.html#Uniform-Window">Uniform Window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Window%20Functions/window_functions.html#Parzen-Window">Parzen Window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Window%20Functions/window_functions.html#Hamming-Window">Hamming Window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Window%20Functions/window_functions.html#Hanning-Window">Hanning Window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Window%20Functions/window_functions.html#Traingular-Window">Traingular Window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Window%20Functions/window_functions.html#Welch-Window">Welch Window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Window%20Functions/window_functions.html#Blackmann's-Window">Blackmann’s Window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Window%20Functions/window_functions.html#Flat-Top-Window">Flat Top Window</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pulsar.html">Analysing Pulsar Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Pulsar/Pulsar%20search%20with%20epoch%20folding%20and%20Z%20squared.html">Simulate a dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Pulsar/Pulsar%20search%20with%20epoch%20folding%20and%20Z%20squared.html#Pulsation-search-with-epoch-folding.">Pulsation search with epoch folding.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Pulsar/Pulsar%20search%20with%20epoch%20folding%20and%20Z%20squared.html#Z-squared-search">Z-squared search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Pulsar/Pulsar%20search%20with%20epoch%20folding%20and%20Z%20squared.html#Thresholding">Thresholding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Pulsar/Pulsar%20search%20with%20epoch%20folding%20and%20Z%20squared.html#Fit-peak-with-Sinc-squared-and-Gaussian-functions">Fit peak with Sinc-squared and Gaussian functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Pulsar/Pulsar%20search%20with%20epoch%20folding%20and%20Z%20squared.html#Phaseogram">Phaseogram</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/Pulsar/Pulsar%20search%20with%20epoch%20folding%20and%20Z%20squared.html#Examples-of-interactive-phaseograms">Examples of interactive phaseograms</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stingray/docs/api.html">Stingray API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/api.html#data-classes">Data Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#lightcurve">Lightcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#eventlist">EventList</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/api.html#fourier-products">Fourier Products</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#crossspectrum">Crossspectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#coherence">Coherence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#powerspectrum">Powerspectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#averagedcrossspectrum">AveragedCrossspectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#averagedpowerspectrum">AveragedPowerspectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#dynamical-powerspectrum">Dynamical Powerspectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#crosscorrelation">CrossCorrelation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#autocorrelation">AutoCorrelation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#module-stingray.deadtime.fad">Dead-Time Corrections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/api.html#higher-order-fourier-and-spectral-timing-products">Higher-Order Fourier and Spectral Timing Products</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#bispectrum">Bispectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#covariancespectrum">Covariancespectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#averagedcovariancespectrum">AveragedCovariancespectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#varenergyspectrum">VarEnergySpectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#rmsenergyspectrum">RmsEnergySpectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#lagenergyspectrum">LagEnergySpectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#excessvariancespectrum">ExcessVarianceSpectrum</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/api.html#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#module-stingray.stats">Statistical Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#module-stingray.gti">GTI Functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#module-stingray.io">I/O Functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#module-stingray.utils">Other Utility Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/api.html#modeling">Modeling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#log-likelihood-classes">Log-Likelihood Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#posterior-classes">Posterior Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#parameter-estimation-classes">Parameter Estimation Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#auxiliary-classes">Auxiliary Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stingray/docs/api.html#convenience-functions">Convenience Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/api.html#pulsar">Pulsar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/api.html#simulator">Simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stingray/docs/api.html#exceptions">Exceptions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="stingray/docs/install.html" class="btn btn-neutral float-right" title="Downloading and Installing Stingray" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018, the Stingray team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
