@@ -15,7 +15,7 @@ jobs:
       - name: Checkout stingray
         uses: actions/checkout@v2
         with:
-          repository: StingraySoftware/stingray
+          repository: jdswinbank/stingray
           path: stingray
       - name: Checkout notebooks
         uses: actions/checkout@v2
