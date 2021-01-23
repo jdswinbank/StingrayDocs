@@ -1,0 +1,32 @@
+name: Build documentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout documentation base
+        uses: actions/checkout@v2
+      - name: Checkout stingray
+        uses: actions/checkout@v2
+        with:
+          repository: StingraySoftware/stingray
+          path: stingray
+      - name: Checkout notebooks
+        uses: actions/checkout@v2
+        with:
+          repository: StingraySoftware/notebooks
+          path: notebooks
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[docs]"
+        working-directory: stingray
+      - name: Build documentation
+        run: make html
